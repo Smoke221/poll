@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+}
+
+#logo-name {
+  display: flex;
+  align-items: center;
+}
+
+#logo-name img {
+  width: 30px;
+  height: auto;
+  margin-right: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#container {
+  display: flex;
+  align-items: flex-start;
+  border: 1px solid red;
+  width: 70%;
+  gap: 30px;
+  margin: auto;
+}
+
+#ads-container {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+}
+
+#ads-1,
+#ads-2,
+#ads-3 {
+  width: 100%;
+  height: 200px;
+  margin: 10px;
+  border: 2px solid black;
+}
+
+#poll-container {
+  border: 1px solid green;
+  flex: 1;
+  overflow-y: auto;
+  margin: 10px;
+}
+
+#question{
+  margin: 10px;
+}
