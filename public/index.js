@@ -26,7 +26,7 @@ fetch("http://localhost:8000/polls", {
 
         optionInput.type = "radio";
         optionInput.name = `question_${e._id}`;
-        optionInput.value = option._id;
+        optionInput.value = index;
 
         optionLabel.textContent = option.option;
 
@@ -47,6 +47,7 @@ fetch("http://localhost:8000/polls", {
       let voteButton = document.createElement("button");
       voteButton.setAttribute("id", "voteBtn");
       voteButton.textContent = "Submit";
+      voteButton.addEventListener("click", () => voteSubmit(e._id));
 
       div.append(numOfVotes, voteButton);
 
@@ -82,3 +83,34 @@ const LoginWithGoogleButton = document.querySelector(".login-with-google-btn");
 LoginWithGoogleButton.addEventListener("click", () => {
   window.location.href = "http://localhost:8000/auth/google";
 });
+
+
+function voteSubmit(pollId) {
+ // Find the selected option index
+ const selectedOptionIndex = document.querySelector(`input[name="question_${pollId}"]:checked`).value;
+
+  // Create the request body with the selected option index
+  const requestBody = {
+    optionIndex: selectedOptionIndex,
+  };
+
+  fetch(`http://localhost:8000/polls/${pollId}/vote`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(requestBody),
+  })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Vote submission failed");
+    }
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data.message);
+  })
+  .catch((error) => {
+    console.error("Error submitting vote:", error);
+  });
+}
