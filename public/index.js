@@ -84,10 +84,11 @@ LoginWithGoogleButton.addEventListener("click", () => {
   window.location.href = "http://localhost:8000/auth/google";
 });
 
-
 function voteSubmit(pollId) {
- // Find the selected option index
- const selectedOptionIndex = document.querySelector(`input[name="question_${pollId}"]:checked`).value;
+  // Find the selected option index
+  const selectedOptionIndex = document.querySelector(
+    `input[name="question_${pollId}"]:checked`
+  ).value;
 
   // Create the request body with the selected option index
   const requestBody = {
@@ -101,16 +102,37 @@ function voteSubmit(pollId) {
     },
     body: JSON.stringify(requestBody),
   })
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error("Vote submission failed");
-    }
-    return response.json();
-  })
-  .then((data) => {
-    console.log(data.message);
-  })
-  .catch((error) => {
-    console.error("Error submitting vote:", error);
-  });
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Vote submission failed");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data.message);
+    })
+    .catch((error) => {
+      console.error("Error submitting vote:", error);
+    });
 }
+
+var stateInput = document.querySelector("#stateInput");
+var allStates = document.querySelectorAll(".dropdown-menu li");
+
+stateInput.addEventListener("keyup", (e) => {
+  var text = e.target.value
+  var pat = new RegExp(text, 'i');
+
+  //Show or hide the list based on whether ther's input
+  document.querySelector(".dropdown-menu").style.display = text.trim() === '' ? "none" : "block";
+  
+  for(let i=0; i<allStates.length; i++){
+    let state = allStates[i];
+    if(pat.test(state.innerText)){
+      state.classList.remove("hidden")
+    }else{
+      state.classList.add("hidden")
+    }
+  }
+  
+})
