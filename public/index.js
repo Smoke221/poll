@@ -13,7 +13,7 @@ fetch("http://localhost:8000/polls", {
 
     activePolls.forEach((e) => {
       let div = document.createElement("div");
-      div.setAttribute("id", "question")
+      div.setAttribute("id", "question");
 
       let question = document.createElement("h3");
       question.textContent = e.question;
@@ -68,3 +68,17 @@ function voteCount(pollId) {
       return 0;
     });
 }
+
+function openModal() {
+  document.getElementById("myModal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("myModal").style.display = "none";
+}
+
+const LoginWithGoogleButton = document.querySelector(".login-with-google-btn");
+
+LoginWithGoogleButton.addEventListener("click", () => {
+  window.location.href = "http://localhost:8000/auth/google";
+});

@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Buzzz</title>
     <link rel="stylesheet" href="index.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <nav>
@@ -14,7 +17,7 @@
         <h3>Buzzz</h3>
       </div>
       <div>
-        <a href="signup.html">About</a>
+        <p class="signin-popup-opener" onclick="openModal()">Signup</p>
       </div>
     </nav>
     <div id="container">
@@ -25,6 +28,20 @@
       </div>
       <div id="poll-container">
         <!-- <div id="poll-1"></div> -->
+      </div>
+    </div>
+    <div id="ltc-poster1">
+      <img src="./Untitled Project.jpg" alt="">
+    </div>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div id="google-signin">
+          <button type="button" class="login-with-google-btn">
+            Sign in with Google
+          </button>
+          <p>Please login to continue...</p>
+        </div>
       </div>
     </div>
   </body>
