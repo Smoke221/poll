@@ -120,19 +120,55 @@ var stateInput = document.querySelector("#stateInput");
 var allStates = document.querySelectorAll(".dropdown-menu li");
 
 stateInput.addEventListener("keyup", (e) => {
-  var text = e.target.value
-  var pat = new RegExp(text, 'i');
+  var text = e.target.value;
+  var pat = new RegExp(text, "i");
 
   //Show or hide the list based on whether ther's input
-  document.querySelector(".dropdown-menu").style.display = text.trim() === '' ? "none" : "block";
-  
-  for(let i=0; i<allStates.length; i++){
+  document.querySelector(".dropdown-menu").style.display =
+    text.trim() === "" ? "none" : "block";
+
+  for (let i = 0; i < allStates.length; i++) {
     let state = allStates[i];
-    if(pat.test(state.innerText)){
-      state.classList.remove("hidden")
-    }else{
-      state.classList.add("hidden")
+    if (pat.test(state.innerText)) {
+      state.classList.remove("hidden");
+    } else {
+      state.classList.add("hidden");
     }
   }
-  
+});
+
+// data of cricket/sports news extracted via python
+const sportsContainer = document.querySelector("#sports-container");
+
+fetch("http://localhost:8000/sports/", {
+  method: "GET",
+  headers: {
+    "Content-type": "application/json",
+  },
 })
+  .then((resolved) => resolved.json())
+  .then((data) => {
+    const sportsData = data.sports_data.slice(0,1);
+    console.log(sportsData);
+
+    sportsContainer.innerHTML = null;
+
+    sportsData.forEach((e) => {
+      const div = document.createElement("div");
+
+      const headline = document.createElement("h4");
+      headline.textContent = e.h5;
+
+      const description = document.createElement("p");
+      description.textContent = e.p;
+
+      const redirectToSource = document.createElement("a");
+
+      div.append(headline, description);
+      sportsContainer.append(div);
+    });
+  })
+  .catch((error) => {
+    console.error("Error fetching sports news:", error);
+    return 0;
+  });

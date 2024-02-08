@@ -188,3 +188,16 @@ li{
 li:hover{
   background-color: #dfdfdf;
 }
+
+/* sports container css */
+#sports-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  width: 70%;
+}
+#sports-container div{
+  width: 50%;
+  overflow: hidden;
+}

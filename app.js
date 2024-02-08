@@ -6,6 +6,7 @@ const { googleRouter } = require("./routes/google-auth");
 const requestIp = require("request-ip");
 const { getLocationMiddleware } = require("./middlewares/getLocation");
 const { authenticate } = require("./middlewares/authenticate");
+const { sportsRouter } = require("./routes/scraped_data/sportsRoute");
 
 require("dotenv").config();
 const app = express();
@@ -21,6 +22,9 @@ app.use("/polls", pollRouter)
 app.use("/auth/google", googleRouter)
 
 // app.use(authenticate)
+
+
+app.use("/sports", sportsRouter)
 
 app.get("/authorized", (req, res) => {
   res.send(
